@@ -1,0 +1,66 @@
+---
+title: "Spreadsheets"
+subtitle: "`http://bit.ly/carpentries-sheets`"
+author: \@mauro_lepore
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  collapse = TRUE
+)
+```
+
+## Motivation and warm up
+
+Most projects start with spreadsheets
+
+* How can you structure the data for a smooth workflow?
+
+* How can you handle dates safely?
+
+* How can you avoid poor data?
+
+* How can you export the data to ensure it'll be useful in the future?
+
+
+
+## [Setup](https://datacarpentry.org/spreadsheet-ecology-lesson/setup/)
+
+To work locally download: 
+
+* <http://bit.ly/carpentries-spreadsheets-messy>
+
+To work online File > Make a copy...: 
+
+* <http://bit.ly/carpentries-googlesheets-messy>
+
+
+
+## What is tidy data? Why bother?
+
+
+
+# Your turn | Clean up the data (15')
+
+
+
+## Tricky dates
+
+
+
+# Discuss | What can you do to control the quality of your data?
+
+
+
+# Demo | Data validation...
+
+
+
+# Your turn | Export your data as .csv.
+
+
+
+# Discuss | Assuming data is now tidy, What other problems may it still have?
+
