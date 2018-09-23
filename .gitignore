@@ -1,0 +1,6 @@
+.Rhistory
+.RData
+.Rproj.user
+data-raw
+openrefine/openrefine-3.0
+sql/sql-database_demo.db

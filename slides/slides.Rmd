@@ -1,0 +1,148 @@
+---
+title: "Introduction to R"
+subtitle: "`http://bit.ly/cr18-r-intro`"
+author: \@mauro_lepore
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  collapse = TRUE
+)
+```
+
+## Data Science http://r4ds.had.co.nz/
+
+<img src="ds_pkg.png" align="right" width = 750 />
+
+## https://www.tidyverse.org/
+
+<img src="tidyverse.png" align="right" width = 750 />
+
+# Transform data
+
+## Tools for data science
+
+```{r}
+library(tidyverse)
+```
+
+## Example dataset
+
+```{r}
+library(fgeo.data)
+dim(luquillo_tree6_random)
+```
+
+## Overview
+
+```{r}
+luquillo_tree6_random
+
+tree <- luquillo_tree6_random
+```
+
+## dplyr: Main verbs
+
+<img src="verbs.png" align="right" width = 750 />
+
+## Filter rows with `filter()`
+
+```{r}
+filter(tree, sp == "PREMON", quadrat == "1017")
+```
+## Equivalent
+
+```{r}
+tree[tree$sp == "PREMON" & tree$quadrat == "1017", ]
+```
+
+## Arrange rows with `arrange()`
+
+```{r}
+arrange(tree, sp, quadrat)
+```
+
+## Arrange in descending order `desc()`
+
+```{r}
+arrange(tree, desc(sp), quadrat)
+```
+
+## Select columns with `select()`
+
+```{r}
+select(tree, sp, quadrat, treeID, status, dbh)
+```
+
+## Select range
+
+```{r}
+select(tree, treeID:quadrat)
+```
+
+## Exclude range
+
+```{r}
+select(tree, -(treeID:quadrat))
+```
+
+## Rename columns with `rename()`
+
+```{r}
+rename(tree, tree_id = treeID)
+```
+
+## Add new columns with mutate()
+
+```{r}
+mutate(tree, 
+  dbh_mm = dbh,
+  dbh_m = dbh_mm / 1000
+)
+```
+
+## Only new variables with `transmute()`
+
+```{r}
+transmute(tree, 
+  dbh_mm = dbh,
+  dbh_m = dbh_mm / 1000
+)
+```
+
+## Summarise values with `summarise()`
+
+```{r}
+by_quad_sp <- group_by(tree, quadrat, sp)
+summarise(by_quad_sp,
+  mean_dbh = mean(dbh, na.rm = TRUE),
+  mean_gx = mean(gx, na.rm = TRUE),
+  mean_gy = mean(gy, na.rm = TRUE)
+)
+```
+
+## Anything by groups with `group_by()`
+
+```{r}
+by_sp <- group_by(tree, quadrat)
+
+summarise(by_sp,
+  mean_dbh = mean(dbh, na.rm = TRUE)
+)
+```
+
+# Learn more
+
+## https://www.rstudio.com/
+
+<img src="rstudio.png" align="right" width = 750 />
+
+## https://rstudio.cloud/learn/primers
+
+<img src="primers.png" align="right" width = 750 />
+
+## https://www.rstudio.com/resources/cheatsheets/
+
+<img src="cheet.png" align="right" width = 750 />
