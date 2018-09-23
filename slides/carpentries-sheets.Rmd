@@ -7,26 +7,16 @@ output: ioslides_presentation
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  echo = TRUE,
+  echo = FALSE,
   collapse = TRUE
 )
 ```
 
-## Motivation and warm up
-
-Most projects start with spreadsheets
-
-* How can you structure the data for a smooth workflow?
-
-* How can you handle dates safely?
-
-* How can you avoid poor data?
-
-* How can you export the data to ensure it'll be useful in the future?
+# [Schedule](https://datacarpentry.org/spreadsheet-ecology-lesson/)
 
 
 
-## [Setup](https://datacarpentry.org/spreadsheet-ecology-lesson/setup/)
+## 0. [Setup](https://datacarpentry.org/spreadsheet-ecology-lesson/setup/)
 
 To work locally download: 
 
@@ -35,6 +25,116 @@ To work locally download:
 To work online File > Make a copy...: 
 
 * <http://bit.ly/carpentries-googlesheets-messy>
+
+
+
+# Your turn | [Download or copy the data](http://bit.ly/carpentries-googlesheets-messy)
+
+
+
+## 1. Introduction | _What are basic principles for using spreadsheets for good data organization?_
+
+
+
+# Poll
+
+### Who has ever used spreadsheets?
+### Who has ever struggled using spreadsheets?
+
+
+
+# Good or bad for what?
+
+* Data entry.
+* Organizing data.
+* Subsetting and sorting data.
+* Statistics.
+* Plotting.
+
+
+
+## 2. Formatting __{structuring}__ data tables in Spreadsheets | _How do we format data in spreadsheets for effective data use?_
+
+> The best layouts ... for data entry and data analysis might be different. 
+
+> It is important to ... automate the conversion from one to another.
+
+
+
+## Wide layout | Best for data entry
+
+```{r, message=FALSE}
+library(tidyverse)
+
+wide <- tibble::tribble(
+  ~plot,  ~F,  ~M,
+     1L, 11L, 12L,
+     2L, 21L, 22L,
+     3L, 31L, 32L
+)
+
+wide %>% knitr::kable()
+```
+
+## From wide to long, automatically in R
+
+```{r long-create, echo=TRUE}
+long <- wide %>% 
+  gather(key = "sex", value = "n", F:M)
+
+long
+```
+
+## Long layout | Best for data analysis, e.g.:
+
+Take `long`, then group by `sex`, then sum the `n` of individuals.
+
+```{r, eval=TRUE, echo=TRUE}
+long %>% 
+  group_by(sex) %>% 
+  summarize(n = sum(n))
+```
+
+
+
+## Make your research reproducible | Track how you cleaned your data 
+
+Automatically with googlesheets: File > Version history
+
+<img src="version-history-googlesheets.png" align="right" width = 750 />
+
+
+
+## Make your research reproducible | Track how you cleaned your data 
+
+Manually: Write cleaning steps in plain text (e.g. README.txt)
+
+<img src="version-history-readme.png" align="right" width = 750 />
+
+
+
+## Structuring data in spreadsheets | What is tidy data?
+
+<img src="tidy-data.png" align="right" width = 750 />
+
+http://r4ds.had.co.nz/tidy-data.html
+
+
+
+# 
+
+End
+
+
+## Templates
+
+<img src="xxx.png" align="right" width = 750 />
+
+
+
+
+
+
 
 
 
