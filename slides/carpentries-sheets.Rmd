@@ -12,27 +12,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-# [Schedule](https://datacarpentry.org/spreadsheet-ecology-lesson/)
+## [Schedule](https://datacarpentry.org/spreadsheet-ecology-lesson/)
 
 
 
-## 0. [Setup](https://datacarpentry.org/spreadsheet-ecology-lesson/setup/)
-
-To work locally download: 
-
-* <http://bit.ly/carpentries-spreadsheets-messy>
-
-To work online File > Make a copy...: 
-
-* <http://bit.ly/carpentries-googlesheets-messy>
-
-
-
-# Your turn | [Download or copy the data](http://bit.ly/carpentries-googlesheets-messy)
-
-
-
-## 1. Introduction | _What are basic principles for using spreadsheets for good data organization?_
+# 1. Introduction (15') | _What are basic principles for using spreadsheets for good data organization?_
 
 
 
@@ -53,7 +37,7 @@ To work online File > Make a copy...:
 
 
 
-## 2. Formatting __{structuring}__ data tables in Spreadsheets | _How do we format data in spreadsheets for effective data use?_
+# 2. Formatting data tables in Spreadsheets (15') | _How do we format data in spreadsheets for effective data use?_
 
 > The best layouts ... for data entry and data analysis might be different. 
 
@@ -113,54 +97,180 @@ Manually: Write cleaning steps in plain text (e.g. README.txt)
 
 
 
-## Structuring data in spreadsheets | What is tidy data?
+## Structuring data in spreadsheets | Tidy data? ([Book chapter](http://r4ds.had.co.nz/tidy-data.html); [paper](http://www.jstatsoft.org/v59/i10))
 
-<img src="tidy-data.png" align="right" width = 750 />
-
-http://r4ds.had.co.nz/tidy-data.html
+<img src="tidy-data.png" align="right" width = 750 />  
 
 
 
-# 
+## Is this data tidy?
 
-End
-
-
-## Templates
-
-<img src="xxx.png" align="right" width = 750 />
+<img src="not-tidy1.png" align="right" width = 750 />
 
 
 
+## Is this data tidy?
+
+<img src="tidy1.png" align="right" width = 750 />
 
 
 
+## Workshop data | ([source](https://datacarpentry.org/ecology-workshop/data/))
+
+_Time-series for a small mammal community in southern Arizona to study the effects of rodents and ants on the plant community_
+
+* Rodents sampled on 24 plots, with different treatments.
+
+* Real dataset (used in over 100 publications).
+
+* Slightly simplified for the workshop.
 
 
 
-## What is tidy data? Why bother?
+# Your turn | Put together data from 2013 and 2014 tabs (10')
+
+To work locally, download: 
+
+<http://bit.ly/carpentries-spreadsheets-messy>, OR
+
+To work online, File > Make a copy...:
+
+<http://bit.ly/carpentries-googlesheets-messy>
 
 
 
-# Your turn | Clean up the data (15')
+## Key points
+
+* Keep raw data raw.
+* Track changes with an automated system or in plain text.
+* Organize your data according to tidy data principles.
 
 
 
-## Tricky dates
+# 3. Formatting problems (skip) | What are some common challenges with formatting data in spreadsheets and how can we avoid them?
 
 
 
-# Discuss | What can you do to control the quality of your data?
+## Learn more | Data organization in spreadsheets 
+
+Broman KW, Woo KH. (2018) Data organization in spreadsheets. PeerJ Preprints 6:e3183v2 https://doi.org/10.7287/peerj.preprints.3183v2
 
 
 
-# Demo | Data validation...
+# 4. Dates as data (10') | What are good approaches for handling dates in spreadsheets?
 
 
 
-# Your turn | Export your data as .csv.
+##
+
+<img src="excercise1.png" align="right" width = 750 />
+
+```{r}
+# Format data with: 
+#   Format > Number  > Number, OR
+#   Format > Number  > More formats
+```
+
+##
+
+<img src="excercise2.png" align="right" width = 750 />
 
 
 
-# Discuss | Assuming data is now tidy, What other problems may it still have?
+## How spreadsheets store dates?
+
+Dates stored as integer: Number of days from 1899-12-31.
+
+WARNING: Can't parse dates before 1899-12-31
+
+<img src="negative-dates.png" align="right" width = 700 />
+
+
+
+##
+
+<img src="excercise3.png" align="right" width = 700 />
+
+
+
+## Preferred date formats | Other programs like these formats
+
+Date: 
+
+* Clear and succint (1 column): `YYYY-MM-DD`
+* Clear but not succint (3 columns): `YEAR`, `MONTH`, `DAY`
+* Succint but unclear (1 column): `YYYYMMDD`.
+
+Generalizing to date-time: `YYYYMMDDhhmmss`
+
+Example in R:
+
+```{r, echo=TRUE, message=FALSE}
+library(lubridate)
+as_datetime("20180923145108")
+```
+
+
+
+## Key point
+
+Format dates so that they are easy to handle.
+
+
+
+# 5. Quality control (5' Optional) | How can we carry out basic quality control and quality assurance in spreadsheets?
+
+
+
+# Demo | Data validation (5') | bit.ly/carpentries-googlesheets-messy
+
+## Demo data validation | Cell range may be from other sheet
+
+<img src="list-from-range.png" align="right" width = 700 />
+
+
+
+## Demo data validation | You can protect sheets and cells
+
+<img src="protect-sheet.png" align="right" width = 700 />
+
+
+
+## Demo data validation | Others can request changes via comments
+
+<img src="comment.png" align="right" width = 700 />
+
+
+
+## Key points
+
+* You can control what type of data gets entered.
+
+* You can explore invalid data with sorting.
+
+* You can flag invalid data with conditional formatting.
+
+
+
+# 6. Exporting data (10') | How can we export data from spreadsheets in a way that is useful for downstream applications?
+
+# Your turn | Export a spreadsheet as a .csv file.
+
+In googlesheets: 
+
+File > Download as > Comma-separated values (.csv, current sheet)
+
+
+# ? | When whould you export Tab-separated values (.tsv)?
+
+
+
+## Key points
+
+
+Export data from spreadsheets to formats plain text (.csv, .tsv) format.
+
+
+
+# End | Have you installed the software for the next lesson?
 
