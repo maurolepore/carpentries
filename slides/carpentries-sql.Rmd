@@ -1,0 +1,113 @@
+---
+title: "SQL"
+subtitle: "`http://bit.ly/carpentries-sql`"
+author: \@mauro_lepore
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  collapse = TRUE
+)
+```
+
+## [Schedule](https://datacarpentry.org/sql-ecology-lesson/)
+
+
+
+
+
+# 1. Databases using SQL (65')
+
+* What is a relational database and why should I use it? 
+* What is SQL?
+
+
+
+##
+
+<img src="sql1.png" align="right" width = 750 />
+
+
+
+## Relational data
+
+Database: Collection of tables connected via some value.
+
+Table; record (= observation = row); field (= column); key; unique identifier; entry (value). 
+
+[Source](http://r4ds.had.co.nz/relational-data.html)
+
+<img src="sql-joins.png" align="right" width = 750 />
+
+
+
+## Explore a database | DB Browser for SQLite
+
+Open Database > portal_mammals.sqlite
+
+Explore tables and tabs:
+
+* _Database Structure_.
+    * Do types vary accross columns of a table?
+    * Do types vary accross rows of a column?
+* _Browse Data_.
+* Execute SQL.
+
+
+## Design
+
+Is data redundant?
+
+* Why would you design a database that way?
+* How you can design a database to achieve that?
+
+
+
+# Your turn | Create a new database importing .csv files
+
+##
+
+Menu:
+
+* _File > New Database_.
+
+* _File > Import > Table from CSV file..._.
+    * Import: surveys.csv, species.csv, plots.csv
+    
+* _Modify Table_
+
+    * use INTEGER, REAL and TEXT (see next slide or [lesson](https://datacarpentry.org/sql-ecology-lesson/00-sql-introduction/index.html)).
+
+## 
+
+<img src="sql-type.png" align="right" width = 750 />
+
+
+
+
+
+
+# 2. Basic Queries | How do I write a basic query in SQL?
+
+
+
+# 3. SQL Aggregation and aliases 
+
+* How can I summarize my data by aggregating, filtering, or ordering query results? 
+* How can I make sure column names from my queries make sense and aren’t too long?
+
+
+
+# 4. Joins | How do I bring data together from separate tables?
+
+
+
+
+
+
+
+
+
+# End | Have you installed the software for the next lesson?
