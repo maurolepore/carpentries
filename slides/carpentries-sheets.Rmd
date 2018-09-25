@@ -267,7 +267,6 @@ File > Download as > Comma-separated values (.csv, current sheet)
 
 ## Key points
 
-
 Export data from spreadsheets to formats plain text (.csv, .tsv) format.
 
 

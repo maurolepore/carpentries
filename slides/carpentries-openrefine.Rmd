@@ -239,14 +239,10 @@ You can export and share cleaned data, or entire projects.
 
 
 
-
 # 7. Other Resources in OpenRefine | What other resources are available for working with OpenRefine?
-
 
 [Learn more](https://datacarpentry.org/OpenRefine-ecology-lesson/06-resources/index.html)
 
 
 
 # End | Have you installed the software for the next lesson?
-
-6
