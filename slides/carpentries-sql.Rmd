@@ -80,7 +80,7 @@ Menu:
 
 ## 
 
-<img src="sql-type.png" align="right" width = 750 />
+<img src="sql-types.png" align="right" width = 750 />
 
 
 
@@ -305,14 +305,210 @@ ORDER BY species_id;
 
 
 
-# 3. SQL Aggregation and aliases 
+# 3. SQL Aggregation and aliases (60')
 
 * How can I summarize my data by aggregating, filtering, or ordering query results? 
+
 * How can I make sure column names from my queries make sense and aren’t too long?
 
 
 
-# 4. Joins | How do I bring data together from separate tables?
+## `COUNT`, ` MAX`, `MIN`, and `AVG` | Some of the simplest, most informative summaries
+
+```sql
+SELECT COUNT(*)
+FROM surveys;
+```
+
+```sql
+SELECT COUNT(*), SUM(weight)
+FROM surveys;
+```
+
+
+
+## Challenge
+
+<img src="sql6.png" align="right" width = 750 />
+
+## Solution
+
+```sql
+-- All animals
+SELECT SUM(weight), AVG(weight), MIN(weight), MAX(weight)
+FROM surveys;
+
+-- Only weights between 5 and 10
+SELECT SUM(weight), AVG(weight), MIN(weight), MAX(weight)
+FROM surveys
+WHERE (weight > 5) AND (weight < 10);
+```
+
+
+
+## Grouped summaries with `GROUP BY`
+
+```sql
+SELECT species_id, COUNT(*)
+FROM surveys
+GROUP BY species_id;
+```
+
+
+
+## Challenge
+
+<img src="sql7.png" align="right" width = 750 />
+
+## Solution
+
+Solution of 1
+
+```sql
+SELECT year, COUNT(*)
+FROM surveys
+GROUP BY year;
+```
+
+Solution of 2 and 3
+
+```sql
+SELECT year, species_id, COUNT(*), AVG(weight) 
+FROM surveys
+GROUP BY year, species_id;
+```
+
+
+
+## `ORDER BY` a summary column
+
+```sql
+SELECT species_id, COUNT(*)
+FROM surveys
+GROUP BY species_id
+ORDER BY COUNT(species_id);
+```
+
+
+
+## Clarify column names with `AS` <alias>
+
+```sql
+SELECT MAX(year) AS last_surveyed_year
+FROM surveys;
+
+SELECT MAX(year) last_surveyed_year
+FROM surveys;
+```
+
+`AS` is optional. This also works (but isn't "good" syle)
+
+```sql
+SELECT MAX(year) last_surveyed_year
+FROM surveys;
+```
+
+
+
+## `GROUP BY <cols> HAVING <cond>` | Filter results of aggregate functions
+
+`HAVING` ~ `WHERE`:
+
+* `<columns> WHERE <condition>`
+* `<results> HAVING <condition>`
+
+## `GROUP BY <cols> HAVING <cond>` | Filter results of aggregate functions
+
+```sql
+SELECT species_id, COUNT(species_id)
+FROM surveys
+GROUP BY species_id
+-- "Smells" a bit
+HAVING COUNT(species_id) > 10;
+
+-- Same but nicer 
+SELECT species_id, COUNT(species_id) AS n
+FROM surveys
+GROUP BY species_id
+HAVING n > 10;
+```
+
+<http://rstd.io/code-smells> (Jenny Bryan)
+
+
+
+## Challenge
+
+<img src="sql8.png" align="right" width = 750 />
+
+## Solution
+
+```sql
+SELECT taxa, COUNT(*) AS n
+FROM species
+GROUP BY taxa
+HAVING n > 10;
+```
+
+
+
+## `CREATE VIEW viewname AS` | Store and reuse queries
+
+```sql
+SELECT *
+FROM surveys
+WHERE year = 2000 AND (month > 4 AND month < 10);
+```
+
+Store
+
+```sql
+CREATE VIEW summer_2000 AS
+SELECT *
+FROM surveys
+WHERE year = 2000 AND (month > 4 AND month < 10);
+```
+
+Reuse
+
+```
+SELECT *
+FROM summer_2000
+WHERE species_id == 'PE';
+```
+
+
+
+
+
+## Be careful with `NULL` values 
+
+
+```sql
+-- 45 individuals which sex is of NULL sex
+SELECT sex, COUNT(*)
+FROM summer_2000
+GROUP BY sex
+
+-- As you expect, excludes NULL
+SELECT COUNT(*)
+FROM summer_2000
+-- Excludes NULL
+WHERE sex == 'F'
+
+-- But tally includes NULL: 366 + 382 + 45 = 793
+SELECT COUNT(*)
+FROM summer_2000
+```
+
+
+
+## Key points
+
+* Use `MIN`, `MAX`, `AVG`, `SUM`, `COUNT`, etc. to operate on aggregated data.
+* Use `AS` to create aliases.
+* Use `HAVING` to filter on aggregate properties (similar to `WHERE`)
+* Use `CREATE VIEW` to store a query.
 
 
 
@@ -322,4 +518,191 @@ ORDER BY species_id;
 
 
 
-# End | Have you installed the software for the next lesson?
+# 4. Joins (25') | How do I bring data together from separate tables?
+
+
+## `JOIN <table> USING <(columns)>`
+
+```sql
+SELECT *
+FROM surveys
+JOIN species
+ON surveys.species_id = species.species_id;
+```
+
+Same, when column names match.
+
+```sql
+SELECT *
+FROM surveys
+JOIN species
+-- Same column name in both tables
+USING (species_id);
+```
+
+
+
+## Challenge
+
+<img src="sql9.png" align="right" width = 750 />
+
+## Solution
+
+```sql
+SELECT species.genus, species.species, surveys.weight
+FROM surveys
+JOIN species
+ON surveys.species_id = species.species_id;
+```
+
+Same
+
+```sql
+SELECT genus, species, weight
+FROM surveys
+JOIN species
+USING (species_id)
+```
+
+
+
+## `<kind of> JOIN` 
+
+`INNER JOIN` = `JOIN`: Keeps all rows that match in both tables
+
+```sql
+SELECT * 
+FROM surveys
+INNER JOIN species
+USING (species_id);
+```
+
+`LEFT JOIN`: Keeps all rows that match in left table
+
+("left" is closest to `FROM`)
+
+```sql
+SELECT * 
+FROM surveys
+LEFT JOIN species
+USING (species_id);
+```
+
+## Solution
+
+<img src="sql10.png" align="right" width = 750 />
+
+xxxcont.here
+
+
+
+
+## Compute on `JOIN`ed results | And a note on style
+
+Left table implicit: Drives attention to `surveys.weight`.
+
+```sql
+SELECT plot_type, AVG(surveys.weight)
+FROM plots
+JOIN surveys
+USING (plot_id)
+GROUP BY plot_type;
+```
+
+Same but burries intention.
+
+```sql
+SELECT plots.plot_type, AVG(surveys.weight)
+FROM surveys
+JOIN plots
+ON surveys.plot_id = plots.plot_id
+GROUP BY plots.plot_type;
+```
+
+
+
+## Challenge
+
+<img src="sql11.png" align="right" width = 750 />
+
+## Solution
+
+```sql
+SELECT species_id, AVG(weight)
+FROM surveys
+JOIN species
+USING (species_id)
+WHERE taxa = 'Rodent'
+GROUP BY species_id;
+```
+
+
+
+## `IFNULL(<column>, <value>)` | To "fill" `NULL` values
+
+```sql
+SELECT species_id, sex, IFNULL(sex, 'U')
+FROM surveys;
+```
+
+
+
+## Challenge
+
+<img src="sql12.png" align="right" width = 750 />
+
+## Solution
+
+```sql
+SELECT hindfoot_length, IFNULL(hindfoot_length, 30)
+FROM surveys;
+```
+
+
+
+## Challenge
+
+<img src="sql13.png" align="right" width = 750 />
+
+## Solution
+
+```sql
+SELECT species_id, AVG(IFNULL(hindfoot_length,30))
+FROM surveys
+GROUP BY species_id;
+```
+
+
+## `NULLIF(<column>, <value>)` | to "null out" specific values
+
+
+`NULLIF` is the inverse of `IFNULL`. 
+
+Returns `NULL` 
+
+If the first argument is equal to the second argument it returns `NULL`.
+
+Else, it returns the original value.
+
+```sql
+SELECT species_id, plot_id, NULLIF(plot_id, 7)
+FROM surveys;
+```
+
+
+
+## There are many more functions | Example: 
+
+<img src="sql14.png" align="right" width = 750 />
+
+
+
+
+
+xxxcont here
+
+
+
+
+
+# End
