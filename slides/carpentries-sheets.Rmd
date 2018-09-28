@@ -103,6 +103,8 @@ Manually: Write cleaning steps in plain text (e.g. README.txt)
 
 ## Structuring data in spreadsheets | Tidy data ([Book chapter](http://r4ds.had.co.nz/tidy-data.html); [paper](http://www.jstatsoft.org/v59/i10))
 
+(Different kinds of data may be in different, _related_ tables.)
+
 <img src="tidy-data.png" align="right" width = 750 />  
 
 
@@ -131,21 +133,12 @@ _Time-series for a small mammal community in southern Arizona to study the effec
 
 
 
-## Discussion
+## Discussion | What's wrong and how would you fix it?
 
-See next slide
+* Online: <http://bit.ly/carpentries-googlesheets-messy>, or
+* Download: <http://bit.ly/carpentries-spreadsheets-messy>
 
-<img src="sheets3.png" align="right" width = 750 />
-
-## Discussion
-
-To work locally, download: 
-
-<http://bit.ly/carpentries-spreadsheets-messy>, OR
-
-To work online, File > Make a copy...:
-
-<http://bit.ly/carpentries-googlesheets-messy>
+<img src="sheets8.png" align="right" width = 750 />
 
 
 
@@ -154,6 +147,7 @@ To work online, File > Make a copy...:
 * Keep raw data raw.
 * Track changes with an automated system or in plain text.
 * Organize your data according to tidy data principles.
+* BTW, Consider google forms.
 
 
 

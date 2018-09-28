@@ -102,6 +102,58 @@ Menu:
 
 
 
+## Bonus: A database in sheets
+
+<img src="sql-6.png" align="right" width = 750 />
+
+
+
+## Bonus: A database in R
+
+```{r, echo = TRUE, message=FALSE}
+library(here)
+library(tidyverse)
+```
+
+Easiest is to work directly with the .csv files.
+
+```{r, echo=TRUE, message=FALSE}
+plots   <- read_csv(here("plots.csv"))
+species <- read_csv(here("species.csv"))
+surveys <- read_csv(here("surveys.csv"))
+```
+
+## Bonus: A database in R
+
+```{r, echo=TRUE}
+surveys 
+```
+
+## Bonus: A database in R
+
+If you already have a database, you can also use it.
+
+```{r, echo=TRUE, message=FALSE}
+path <- here("data-raw/portal/portal_mammals.sqlite")
+db <- DBI::dbConnect(RSQLite::SQLite(), path)
+```
+
+Copy each table from the database.
+
+```{r, echo=TRUE, message=FALSE}
+plots_db   <- tbl(db, "plots")
+species_db <- tbl(db, "species")
+surveys_db <- tbl(db, "surveys")
+```
+
+## Bonus: A database in R
+
+```{r, echo=TRUE}
+surveys_db
+```
+
+
+
 # 2. Basic Queries (35') | How do I write a basic query in SQL?
 
 
