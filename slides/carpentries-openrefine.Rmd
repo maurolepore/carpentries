@@ -225,8 +225,8 @@ OpenRefine helps you overview numerical data.
 
 # 5. Scripts from OpenRefine (15')
 
-* _How can we document the data-cleaning steps we've applied to our data?_
-* _How can we apply these steps to additional data sets?_
+* _How can we document the data-cleaning steps?_
+* _How can we apply these steps to other datasets?_
 
 
 ## Export scripts of your work history | Undo / Redo > Extract...
@@ -234,11 +234,15 @@ OpenRefine helps you overview numerical data.
 * OpenRefine scripts your history.
 * You can extract and save it as plain text.
 
+<img src="openref16.png" align="right" width = 750 />
+
 
 
 ## Export scripts of your work history | Undo / Redo > Apply...
 
 * You can apply stored cleaning steps to other datasets with the same structure.
+
+<img src="openref17.png" align="right" width = 750 />
 
 
 
