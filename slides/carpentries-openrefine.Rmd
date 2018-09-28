@@ -137,17 +137,17 @@ Facet and cluster your data to identify errors or outliers.
 
 
 
-# Your turn | Filter scientificNames matching "bai"
+## Exercise 
 
-* What happens if you type more characters?
+* Filter the scientificNames matching "bai".
+* Type more characters.
+* Click on each species' name; and on _include / exclude_.
 
-* What happens if you click on: 
-  * each species' name.
-  * include / exclude
+<img src="openref13.png" align="right" width = 750 />
 
 
 
-## Sorting by one column
+## Exercise | Sorting by one column
 
 <img src="openrefine-ex5.png" align="right" width = 750 />
 
@@ -155,7 +155,7 @@ Facet and cluster your data to identify errors or outliers.
 
 
 
-## Sorting by multiple columns
+## Exercise | Sorting by multiple columns
 
 <img src="openrefine-ex7.png" align="right" width = 750 />
 
@@ -169,43 +169,49 @@ Sorting and filtering with Openrefine keeps raw data raw.
 
 
 
-# 4. Examining Numbers in OpenRefine (10')
+# 4. Examining Numbers (20')
 
-* _How can we convert a column from one data type to another?_
+* _How can we change the type of a column?_
 * _How can we visualize relationships among columns?_
 
 
-## Change type | Change recordID to number
+## Change type of `recordID` to number
 
-Edit cells > Common transforms… > To number
+(__First remove any facet.__)
 
-* Ensure you remove any facet.
+<img src="openref14.png" align="right" width = 750 />
 
 
-## Numeric facet
+
+## Exercise | Numeric facet
 
 <img src="openrefine-ex8.png" align="right" width = 750 />
 
-
-## Numeric facet
+## Exercise | Numeric facet
 
 <img src="openrefine-ex9.png" align="right" width = 750 />
 
 
 
-## Scatterplot facet on recordID | Explore ralationship among numeric columns
+## Create a Scatterplot facet on `recordID`
+
+(__`recordID`, `period`, and 2 more columns should be numbers__)
+
+<img src="openref15.png" align="right" width = 750 />
+
+
+## Exercise | Explore ralationship among numeric columns
+
 
 <img src="openrefine-ex10.png" align="right" width = 750 />
 
 
 
-##
+## Exercise
 
 <img src="openrefine-ex11.png" align="right" width = 750 />
 
-
-
-##
+## Exercise
 
 <img src="openrefine-ex12.png" align="right" width = 750 />
 
