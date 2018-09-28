@@ -12,20 +12,28 @@ knitr::opts_chunk$set(
 )
 ```
 
-## [Schedule](https://datacarpentry.org/sql-ecology-lesson/)
+## Tentative schedule
+
+<img src="sql-1.png" align="right" width = 750 />
 
 
 
 # 1. Databases using SQL (65')
 
-* What is a relational database and why should I use it? 
+* What is a relational database and why bother? 
 * What is SQL?
 
 
 
-##
+## Challenge
 
 <img src="sql1.png" align="right" width = 750 />
+
+## Solution
+
+Open and explore each file with the previous questions in mind.
+
+<img src="sql-2.png" align="right" width = 750 />
 
 
 
@@ -41,17 +49,19 @@ Table; record (= observation = row); field (= column); key; unique identifier; e
 
 
 
-## Explore a database | DB Browser for SQLite
+## Explore a database
 
-Open Database > portal_mammals.sqlite
+<img src="sql-3.png" align="right" width = 750 />
 
-Explore tables and tabs:
+## Explore a database
 
-* _Database Structure_.
-    * Do types vary across columns of a table?
-    * Do types vary across rows of a column?
-* _Browse Data_.
-* Execute SQL.
+Explore all tabs. In _Database Structure_:
+
+* Do types vary across columns of a table?
+* Do types vary across rows of a column?
+    
+<img src="sql-4.png" align="right" width = 750 />
+
 
 
 ## Design
@@ -63,9 +73,11 @@ Is data redundant?
 
 
 
-# Your turn | Create a new database importing .csv files
+## Exercise | Create a new database importing .csv files
 
-##
+<img src="sql-5.png" align="right" width = 750 />
+
+## Exercise | Create a new database importing .csv files
 
 Menu:
 
@@ -78,7 +90,7 @@ Menu:
 
     * use INTEGER, REAL and TEXT (see next slide or [lesson](https://datacarpentry.org/sql-ecology-lesson/00-sql-introduction/index.html)).
 
-## 
+## Exercise | Column types
 
 <img src="sql-types.png" align="right" width = 750 />
 
@@ -94,7 +106,7 @@ Menu:
 
 
 
-## `SELECT <columns> FROM <table>` | different ways
+## `SELECT <columns> FROM <table>` | Different ways to do the same:
 
 ```sql
 SELECT *
@@ -299,8 +311,11 @@ ORDER BY species_id;
 ## Key points
 
 * "Good" style and comments make your code easier to understand.
+
 * SQL helps you select columns, filter and order rows
+
 * Pick specific rows using conditions with `AND`, `OR` and `IN`.
+
 * Compute on column values with arithmetic operators.
 
 
@@ -401,7 +416,7 @@ SELECT MAX(year) last_surveyed_year
 FROM surveys;
 ```
 
-`AS` is optional. This also works (but isn't "good" syle)
+`AS` is optional. This also works (but isn't "good" style)
 
 ```sql
 SELECT MAX(year) last_surveyed_year
@@ -471,7 +486,7 @@ WHERE year = 2000 AND (month > 4 AND month < 10);
 
 Reuse
 
-```
+```sql
 SELECT *
 FROM summer_2000
 WHERE species_id == 'PE';
@@ -506,8 +521,11 @@ FROM summer_2000
 ## Key points
 
 * Use `MIN`, `MAX`, `AVG`, `SUM`, `COUNT`, etc. to operate on aggregated data.
+
 * Use `AS` to create aliases.
-* Use `HAVING` to filter on aggregate properties (similar to `WHERE`)
+
+* Use `HAVING` to filter on aggregate properties (similar to `WHERE`).
+
 * Use `CREATE VIEW` to store a query.
 
 
@@ -592,9 +610,6 @@ USING (species_id);
 
 <img src="sql10.png" align="right" width = 750 />
 
-xxxcont.here
-
-
 
 
 ## Compute on `JOIN`ed results | And a note on style
@@ -609,7 +624,7 @@ USING (plot_id)
 GROUP BY plot_type;
 ```
 
-Same but burries intention.
+Same but buries intention.
 
 ```sql
 SELECT plots.plot_type, AVG(surveys.weight)
@@ -709,7 +724,7 @@ ORDER BY LENGTH(genus) DESC
 ```
 
 
-## Key point
+## Key points
 
 * Use the `JOIN <table> USING <(common column)>` to combine data from two tables.
 
