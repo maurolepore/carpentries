@@ -48,7 +48,7 @@ knitr::opts_chunk$set(
 
 ## Create a Text facet on scientificName | Facet > Text facet
 
-<img src="openref7.png" align="right" width = 750 />
+<img src="openref18.png" align="right" width = 750 />
 
 ## Create a Text facet on scientificName 
 
@@ -195,7 +195,7 @@ Sorting and filtering with Openrefine keeps raw data raw.
 
 ## Create a Scatterplot facet on `recordID`
 
-(__`recordID`, `period`, and 2 more columns should be numbers__)
+(__`recordID`, `period`, and 2 other columns should be numbers__)
 
 <img src="openref15.png" align="right" width = 750 />
 

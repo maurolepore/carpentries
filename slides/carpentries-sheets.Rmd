@@ -42,7 +42,7 @@ knitr::opts_chunk$set(
 
 
 
-# 2. Formatting data tables in Spreadsheets (35') | How to structure data so it is easy to work with
+# 2. Formatting data tables in Spreadsheets (35') | How to structure a dataset so that it is easy to work with
 
 
 
@@ -254,7 +254,7 @@ From [_be_pragmatic()_](https://bookdown.org/maurolepore/pragmatic/pragmatic.htm
 
 ## Demo data validation | [bit.ly/carpentries-googlesheets-messy](https://bit.ly/carpentries-googlesheets-messy)
 
-Cell range may be defined in another sheet
+_Cell range_ and _Criteria_ may come from different sheets.
 
 <img src="list-from-range.png" align="right" width = 700 />
 

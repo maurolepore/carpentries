@@ -106,7 +106,7 @@ Menu:
 
 
 
-## `SELECT <columns> FROM <table>` | Different ways to do the same:
+## `SELECT <columns> FROM <table>` | Different ways to select columns from a table:
 
 ```sql
 SELECT *
@@ -157,7 +157,7 @@ FROM surveys;
 
 
 
-## Calculated values | `+`, `-`, `*`, `/`, and `ROUND(<what?>, <integer>)`
+## Calculated values | `+`, `-`, `*`, `/`, and `ROUND(<what?>, <digits>)`
 
 ```sql
 SELECT year, month, day, weight / 1000
@@ -209,7 +209,7 @@ FROM surveys;
 ```sql
 SELECT *
 FROM surveys
-WHERE species_id='DM';
+WHERE species_id = 'DM';
 ```
 
 ```sql
@@ -599,16 +599,18 @@ USING (species_id);
 
 ("left" is closest to `FROM`)
 
+## Challenge
+
+<img src="sql10.png" align="right" width = 750 />
+
+## Solution
+
 ```sql
 SELECT * 
 FROM surveys
 LEFT JOIN species
 USING (species_id);
 ```
-
-## Solution
-
-<img src="sql10.png" align="right" width = 750 />
 
 
 
@@ -643,12 +645,12 @@ GROUP BY plots.plot_type;
 ## Solution
 
 ```sql
-SELECT species_id, AVG(weight)
+SELECT plot_id, genus, COUNT(*) AS n
 FROM surveys
 JOIN species
 USING (species_id)
-WHERE taxa = 'Rodent'
-GROUP BY species_id;
+GROUP BY genus, plot_id
+ORDER BY plot_id ASC, n DESC;
 ```
 
 
@@ -724,9 +726,10 @@ ORDER BY LENGTH(genus) DESC
 ```
 
 
+
 ## Key points
 
-* Use the `JOIN <table> USING <(common column)>` to combine data from two tables.
+* Use `JOIN <table> USING <(common column)>` to combine data from two tables.
 
 * Use `(INNER) JOIN` to keep rows that match on both tables; or `LEFT JOIN` to keep all rows of the left table and the matching rows of the right table.
 
