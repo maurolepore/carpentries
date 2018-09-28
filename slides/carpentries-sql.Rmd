@@ -696,12 +696,28 @@ FROM surveys;
 <img src="sql14.png" align="right" width = 750 />
 
 
+## Challenge
+
+<img src="sql15.png" align="right" width = 750 />
+
+## Solution
+
+```sql
+SELECT genus, LENGTH(genus)
+FROM species
+ORDER BY LENGTH(genus) DESC
+```
 
 
+## Key point
 
-xxxcont here
+* Use the `JOIN <table> USING <(common column)>` to combine data from two tables.
 
+* Use `(INNER) JOIN` to keep rows that match on both tables; or `LEFT JOIN` to keep all rows of the left table and the matching rows of the right table.
 
+* Use `IFNULL(<column>, <value>)` to "fill" `NULL` values; and `NULLIF(<column>, <value>)` to "null out" specific values.
+
+* Use other functions e.g. `LENGTH(<column>)` to operate on individual values.
 
 
 
