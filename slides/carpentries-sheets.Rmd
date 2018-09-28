@@ -12,22 +12,22 @@ knitr::opts_chunk$set(
 )
 ```
 
-## [Schedule](https://datacarpentry.org/spreadsheet-ecology-lesson/)
+## Tentative schedule
+
+<img src="sheets1.png" align="right" width = 750 />
+
+
+# 1. Introduction (18') | Principles for good data organization
 
 
 
-# 1. Introduction (15') | _What are basic principles for using spreadsheets for good data organization?_
+## Exercise
+
+<img src="sheets2.png" align="right" width = 750 />
 
 
 
-# Poll
-
-### Who has ever used spreadsheets?
-### Who has ever struggled using spreadsheets?
-
-
-
-# Good or bad for what?
+## What are spreadsheets good/bad for?
 
 * Data entry.
 * Organizing data.
@@ -36,16 +36,21 @@ knitr::opts_chunk$set(
 * Plotting.
 
 
+## Key point
 
-# 2. Formatting data tables in Spreadsheets (15') | _How do we format data in spreadsheets for effective data use?_
-
-> The best layouts ... for data entry and data analysis might be different. 
-
-> It is important to ... automate the conversion from one to another.
+* It is crucial to organize research data well.
 
 
 
-## Wide layout | Best for data entry
+# 2. Formatting data tables in Spreadsheets (35') | How to structure data so it is easy to work with
+
+
+
+## Wide layout: Good to enter data | Example
+
+* Each cell represents a count of individuals for a given combination of `plot` and `Sex`.
+
+* The variable `sex` is implicit. It's values are spread along two columns `F` and `M`. 
 
 ```{r, message=FALSE}
 library(tidyverse)
@@ -56,11 +61,10 @@ wide <- tibble::tribble(
      2L, 21L, 22L,
      3L, 31L, 32L
 )
-
-wide %>% knitr::kable()
+knitr::kable(wide)
 ```
 
-## From wide to long, automatically in R
+## From wide to long, automatically | The key word here is automatically. Example in R:
 
 ```{r long-create, echo=TRUE}
 long <- wide %>% 
@@ -69,7 +73,7 @@ long <- wide %>%
 long
 ```
 
-## Long layout | Best for data analysis, e.g.:
+## Long layout: Great for data analysis | Example in R
 
 Take `long`, then group by `sex`, then sum the `n` of individuals.
 
@@ -97,25 +101,25 @@ Manually: Write cleaning steps in plain text (e.g. README.txt)
 
 
 
-## Structuring data in spreadsheets | Tidy data? ([Book chapter](http://r4ds.had.co.nz/tidy-data.html); [paper](http://www.jstatsoft.org/v59/i10))
+## Structuring data in spreadsheets | Tidy data ([Book chapter](http://r4ds.had.co.nz/tidy-data.html); [paper](http://www.jstatsoft.org/v59/i10))
 
 <img src="tidy-data.png" align="right" width = 750 />  
 
 
 
-## Is this data tidy?
+## Is this a tidy dataset?
 
 <img src="not-tidy1.png" align="right" width = 750 />
 
 
 
-## Is this data tidy?
+## Is this a tidy dataset?
 
 <img src="tidy1.png" align="right" width = 750 />
 
 
 
-## Workshop data | ([source](https://datacarpentry.org/ecology-workshop/data/))
+## Introduction to workshop data | ([source](https://datacarpentry.org/ecology-workshop/data/))
 
 _Time-series for a small mammal community in southern Arizona to study the effects of rodents and ants on the plant community_
 
@@ -127,7 +131,13 @@ _Time-series for a small mammal community in southern Arizona to study the effec
 
 
 
-# Your turn | Put together data from 2013 and 2014 tabs (10')
+## Discussion
+
+See next slide
+
+<img src="sheets3.png" align="right" width = 750 />
+
+## Discussion
 
 To work locally, download: 
 
@@ -147,7 +157,9 @@ To work online, File > Make a copy...:
 
 
 
-# 3. Formatting problems (skip) | What are some common challenges with formatting data in spreadsheets and how can we avoid them?
+# 3. Formatting problems | Common formatting challenges and how to avoid them
+
+See lesson.
 
 
 
@@ -157,11 +169,11 @@ Broman KW, Woo KH. (2018) Data organization in spreadsheets. PeerJ Preprints 6:e
 
 
 
-# 4. Dates as data (10') | What are good approaches for handling dates in spreadsheets?
+# 4. Dates as data (13') | How to handle dates safely
 
 
 
-##
+## Exercise
 
 <img src="excercise1.png" align="right" width = 750 />
 
@@ -171,10 +183,19 @@ Broman KW, Woo KH. (2018) Data organization in spreadsheets. PeerJ Preprints 6:e
 #   Format > Number  > More formats
 ```
 
-##
+## Solution
+
+<img src="sheets4.png" align="right" width = 750 />
+
+
+
+## Exercise
 
 <img src="excercise2.png" align="right" width = 750 />
 
+## Solution
+
+<img src="sheets5.png" align="right" width = 750 />
 
 
 ## How spreadsheets store dates?
@@ -187,13 +208,16 @@ WARNING: Can't parse dates before 1899-12-31
 
 
 
-##
+## Exercise
 
 <img src="excercise3.png" align="right" width = 700 />
 
+## Solution
+
+<img src="sheets6.png" align="right" width = 750 />
 
 
-## Preferred date formats | Other programs like these formats
+## Preferred date formats | Many programs like these formats
 
 Date: 
 
@@ -214,17 +238,23 @@ as_datetime("20180923145108")
 
 ## Key point
 
-Format dates so that they are easy to handle.
+Format dates for any program to interpret them correctly.
 
 
 
-# 5. Quality control (5' Optional) | How can we carry out basic quality control and quality assurance in spreadsheets?
+# 5. Quality control (5') | How to validate data to avoid errors
+
+## Design a system to miminize errors
+
+From [_be_pragmatic()_](https://bookdown.org/maurolepore/pragmatic/pragmatic.html#10)
+
+<img src="sheets7.png" align="right" width = 750 />
 
 
 
-# Demo | Data validation (5') | bit.ly/carpentries-googlesheets-messy
+## Demo data validation | [bit.ly/carpentries-googlesheets-messy](https://bit.ly/carpentries-googlesheets-messy)
 
-## Demo data validation | Cell range may be from other sheet
+Cell range may be defined in another sheet
 
 <img src="list-from-range.png" align="right" width = 700 />
 
@@ -252,22 +282,21 @@ Format dates so that they are easy to handle.
 
 
 
-# 6. Exporting data (10') | How can we export data from spreadsheets in a way that is useful for downstream applications?
+# 6. Exporting data (10') | How to export data to maximize downstream applications
 
-# Your turn | Export a spreadsheet as a .csv file.
+## Export a spreadsheet as a .csv file 
 
 In googlesheets: 
 
 File > Download as > Comma-separated values (.csv, current sheet)
 
-
-# ? | When whould you export Tab-separated values (.tsv)?
+__When whould you export Tab-separated values (.tsv)?__
 
 
 
 ## Key points
 
-Export data from spreadsheets to formats plain text (.csv, .tsv) format.
+Export data to plain text formats (.csv, .tsv).
 
 
 
