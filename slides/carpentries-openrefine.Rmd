@@ -12,21 +12,23 @@ knitr::opts_chunk$set(
 )
 ```
 
-## [Schedule](https://datacarpentry.org/OpenRefine-ecology-lesson/)
+## Tentative schedule
+
+<img src="openref1.png" align="right" width = 750 />
 
 
 
-# 1. Introduction | What is OpenRefine useful for?
-
-Key points:
+# 1. Introduction (10') | What is OpenRefine useful for?
 
 * Free, open source tool for data cleaning.
+
 * Can do challenging cleaning easily.
+
 * Tracks history automatically.
 
 
 
-# 2. Working with OpenRefine (30')
+# 2. Working with OpenRefine (35')
 
 * _How can we bring our data into OpenRefine?_
 * _How can we sort and summarize our data?_
@@ -34,73 +36,91 @@ Key points:
 
 
 
-# Demo Create project | Import Portal_rodents_19772002_scinameUUIDs.csv
+## Create a project | Import Portal_rodents_19772002_scinameUUIDs.csv
 
-* Play with preview.
+<img src="openref3.png" align="right" width = 750 />
 
-# Demo Text facet on scientificName | Facet > Text facet
+## Create a project | Play with preview 
 
-## 
-
-* Sort by name and by count.
-
-    * Can you spot any problem?
-
-* Hover over names to reveal the edit function
-
-    * Can fix something everywhere, then undo.
+<img src="openref4.png" align="right" width = 750 />
 
 
 
-## 
+## Create a Text facet on scientificName | Facet > Text facet
+
+<img src="openref7.png" align="right" width = 750 />
+
+## Create a Text facet on scientificName 
+
+1. Sort by name and by count. Can you spot any problem?
+1. Hover over names to reveal the edit function
+    * Fix something everywhere, then undo.
+
+<img src="openref8.png" align="right" width = 750 />
+
+
+
+## Exercise 
 
 <img src="openrefine-ex1.png" align="right" width = 750 />
 
+## Solution
 
-
-# Demo clustering | finding alternative representations of the same thing
-
-* Clean scientificName via clustering on the Text Facet.
-
-    * Merge using metaphone3 (should identify three clusters)
-    * Try different Methods but don’t Merge again (to stick to lesson)
+<img src="openref5.png" align="right" width = 750 />
 
 
 
-# Demo split columns
+## Cluster scientificName to clean it
 
-* Split `scientificName` into genus and species.
-    * Edit Column > Split into several columns...
-    * replace the comma with a space.
-    * Uncheck "Remove this column".
+* Merge using metaphone3 (should identify three clusters).
+* Try different Methods but don’t Merge again.
 
-There is a problem with leading white space. See next.
+<img src="openref6.png" align="right" width = 750 />
 
 
 
-# Demo trim whitespace
+## Split columns 
 
-Fix it and repeat.
+Split `scientificName` into genus and species:
+
+* Edit Column > Split into several columns...
+
+<img src="openref9.png" align="right" width = 750 />
+
+## Split columns 
+
+* replace the comma with a space.
+* Uncheck "Remove this column".
+
+(There is a problem with leading white space. See next.)
+
+<img src="openref10.png" align="right" width = 750 />
 
 
-On scientificName: 
 
-* Edit cells > Common transforms > Trim leading and trailing white space.
-* Repeat split.
+## Trim whitespace
 
-__Use undo / redo to leave the dataset unsplit__
+* Undo previous split, trim whitespace, an repeat split.
+
+(__Finally undo to leave the dataset unsplit__.)
+
+<img src="openref11.png" align="right" width = 750 />
 
 
 
-## 
+## Exercise
 
 <img src="openrefine-ex2.png" align="right" width = 750 />
+
+## Solution
+
+<img src="openref12.png" align="right" width = 750 />
 
 
 
 ## Key points
 
-Faceting and clustering approaches can identify errors or outliers in data.
+Facet and cluster your data to identify errors or outliers.
 
 
 
