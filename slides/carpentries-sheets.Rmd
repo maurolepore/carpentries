@@ -300,5 +300,5 @@ Export data to plain text formats (.csv, .tsv).
 
 
 
-# End | Have you installed the software for the next lesson?
+# End | Have you installed the software for the next lesson?  
 
