@@ -147,7 +147,11 @@ _Time-series for a small mammal community in southern Arizona to study the effec
 * Keep raw data raw.
 * Track changes with an automated system or in plain text.
 * Organize your data according to tidy data principles.
-* BTW, Consider google forms.
+
+
+## Bonus: Google forms and sheets
+
+Demo
 
 
 
