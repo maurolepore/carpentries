@@ -3408,6 +3408,30 @@ ORDER BY species_id;</pre>
 <li><p>Compute on column values with arithmetic operators.</p></li>
 </ul>
 
+</article></slide><slide class=""><hgroup><h2>Bonus: Basic query in R</h2></hgroup><article  id="bonus-basic-query-in-r">
+
+<pre class = 'prettyprint lang-r'>surveys %&gt;%
+  mutate(weight_kg = round(weight / 1000, 2)) %&gt;% 
+  select(year, month, day, species_id, weight_kg) %&gt;% 
+  filter(year == 1999) %&gt;%
+  arrange(species_id) %&gt;% 
+  # Show interesting rows
+  filter(!is.na(weight_kg))
+## # A tibble: 1,075 x 5
+##     year month   day species_id weight_kg
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;          &lt;dbl&gt;
+##  1  1999     1    16 DM              0.04
+##  2  1999     1    16 DM              0.05
+##  3  1999     1    16 DM              0.05
+##  4  1999     1    16 DM              0.04
+##  5  1999     1    16 DM              0.05
+##  6  1999     1    16 DM              0.04
+##  7  1999     1    16 DM              0.05
+##  8  1999     1    16 DM              0.04
+##  9  1999     1    16 DM              0.04
+## 10  1999     1    16 DM              0.05
+## # ... with 1,065 more rows</pre>
+
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>3. SQL Aggregation and aliases (60’)</h2></hgroup><article  id="sql-aggregation-and-aliases-60">
 
 <ul>
@@ -3563,6 +3587,46 @@ FROM summer_2000</pre>
 <li><p>Use <code>CREATE VIEW</code> to store a query.</p></li>
 </ul>
 
+</article></slide><slide class=""><hgroup><h2>Bonus: Aggregation and aliases</h2></hgroup><article  id="bonus-aggregation-and-aliases">
+
+<pre class = 'prettyprint lang-r'>surveys %&gt;% 
+  group_by(species_id) %&gt;% 
+  summarize(n = n()) %&gt;% 
+  filter(n &gt; 10)
+## # A tibble: 30 x 2
+##    species_id     n
+##    &lt;chr&gt;      &lt;int&gt;
+##  1 AB           303
+##  2 AH           437
+##  3 BA            46
+##  4 CB            50
+##  5 CM            13
+##  6 CQ            16
+##  7 DM         10596
+##  8 DO          3027
+##  9 DS          2504
+## 10 DX            40
+## # ... with 20 more rows</pre>
+
+</article></slide><slide class=""><hgroup><h2>Bonus: Aggregation and aliases</h2></hgroup><article  id="bonus-aggregation-and-aliases-1">
+
+<p><code>count()</code> is so common that has a shortcut</p>
+
+<pre >## # A tibble: 30 x 2
+##    species_id     n
+##    &lt;chr&gt;      &lt;int&gt;
+##  1 AB           303
+##  2 AH           437
+##  3 BA            46
+##  4 CB            50
+##  5 CM            13
+##  6 CQ            16
+##  7 DM         10596
+##  8 DO          3027
+##  9 DS          2504
+## 10 DX            40
+## # ... with 20 more rows</pre>
+
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>4. Joins (25’) </h2><h3> How do I bring data together from separate tables?</h3></hgroup><article  id="joins-25-how-do-i-bring-data-together-from-separate-tables">
 
 </article></slide><slide class=""><hgroup><h2><code>JOIN &lt;table&gt; USING &lt;(columns)&gt;</code></h2></hgroup><article  id="join-table-using-columns">
@@ -3712,6 +3776,25 @@ ORDER BY LENGTH(genus) DESC</pre>
 <li><p>Use <code>IFNULL(&lt;column&gt;, &lt;value&gt;)</code> to &ldquo;fill&rdquo; <code>NULL</code> values; and <code>NULLIF(&lt;column&gt;, &lt;value&gt;)</code> to &ldquo;null out&rdquo; specific values.</p></li>
 <li><p>Use other functions e.g. <code>LENGTH(&lt;column&gt;)</code> to operate on individual values.</p></li>
 </ul>
+
+</article></slide><slide class=""><hgroup><h2>Bonus: Joins in R</h2></hgroup><article  id="bonus-joins-in-r">
+
+<pre class = 'prettyprint lang-r'>plots %&gt;%
+  left_join(surveys) %&gt;% 
+  group_by(plot_type) %&gt;% 
+  mutate(mean_weight = mean(weight, na.rm = TRUE)) %&gt;% 
+  select(plot_type, mean_weight) %&gt;% 
+  unique()
+## Joining, by = &quot;plot_id&quot;
+## # A tibble: 5 x 2
+## # Groups:   plot_type [5]
+##   plot_type                 mean_weight
+##   &lt;chr&gt;                           &lt;dbl&gt;
+## 1 Spectab exclosure                51.6
+## 2 Control                          48.6
+## 3 Long-term Krat Exclosure         27.2
+## 4 Rodent Exclosure                 32.5
+## 5 Short-term Krat Exclosure        41.2</pre>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>End</h2></hgroup><article  id="end"></article></slide>
 

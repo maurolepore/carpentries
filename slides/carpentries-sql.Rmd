@@ -371,6 +371,19 @@ ORDER BY species_id;
 * Compute on column values with arithmetic operators.
 
 
+## Bonus: Basic query in R
+
+```{r, echo=TRUE}
+surveys %>%
+  mutate(weight_kg = round(weight / 1000, 2)) %>% 
+  select(year, month, day, species_id, weight_kg) %>% 
+  filter(year == 1999) %>%
+  arrange(species_id) %>% 
+  # Show interesting rows
+  filter(!is.na(weight_kg))
+```
+
+
 
 # 3. SQL Aggregation and aliases (60')
 
@@ -582,9 +595,26 @@ FROM summer_2000
 
 
 
+## Bonus: Aggregation and aliases
 
+```{r, echo=TRUE}
+surveys %>% 
+  group_by(species_id) %>% 
+  summarize(n = n()) %>% 
+  filter(n > 10)
+```
 
+## Bonus: Aggregation and aliases
 
+`count()` is so common that has a shortcut
+
+```{r}
+surveys %>% 
+  # group_by(species_id) %>% 
+  # summarize(n = n()) %>% 
+  count(species_id) %>% 
+  filter(n > 10)
+```
 
 
 
@@ -789,6 +819,18 @@ ORDER BY LENGTH(genus) DESC
 
 * Use other functions e.g. `LENGTH(<column>)` to operate on individual values.
 
+
+
+## Bonus: Joins in R
+
+```{r, echo=TRUE}
+plots %>%
+  left_join(surveys) %>% 
+  group_by(plot_type) %>% 
+  mutate(mean_weight = mean(weight, na.rm = TRUE)) %>% 
+  select(plot_type, mean_weight) %>% 
+  unique()
+```
 
 
 # End
