@@ -381,7 +381,7 @@ FROM summer_2000
 
 
 
-## Bonus: Aggregation and aliases
+## Bonus: Aggregation and aliases in R
 
 ```{r, echo=TRUE}
 surveys %>% 
@@ -390,7 +390,7 @@ surveys %>%
   filter(n > 10)
 ```
 
-## Bonus: Aggregation and aliases
+## Bonus: Aggregation and aliases in R
 
 `count()` is so common that has a shortcut
 
