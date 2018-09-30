@@ -129,7 +129,7 @@ surveys <- read_csv(here("surveys.csv"))
 surveys 
 ```
 
-## Bonus: A database in R
+## Bonus: Using an database connection from R | Connecting to the database
 
 If you already have a database, you can also use it.
 
@@ -138,249 +138,35 @@ path <- here("data-raw/portal/portal_mammals.sqlite")
 db <- DBI::dbConnect(RSQLite::SQLite(), path)
 ```
 
-Copy each table from the database.
+## Bonus: Using an database connection from R | Queries with SQL from rmarkdown (R)
+
+Using these chunk options:
+
+`{sql, engine = "sql", connection = "db"}`
+
+```{sql, echo = TRUE, engine = "sql", connection = "db"}
+SELECT record_id, plot_id, species_id, sex
+FROM surveys
+```
+
+
+
+## Bonus: Using an database connection from R | Queries with R via R-SQL objects
+
+Creating special tables to query the database.
 
 ```{r, echo=TRUE, message=FALSE}
 plots_db   <- tbl(db, "plots")
 species_db <- tbl(db, "species")
 surveys_db <- tbl(db, "surveys")
+
+class(surveys_db)
 ```
 
-## Bonus: A database in R
+## Bonus: Using an database connection from R | Queries with R via R-SQL objects
 
 ```{r, echo=TRUE}
 surveys_db
-```
-
-
-
-# 2. Basic Queries (35') | How do I write a basic query in SQL?
-
-
-
-## `SELECT <columns> FROM <table>` | Different ways to select columns from a table:
-
-```sql
-SELECT *
-FROM surveys;
-```
-
-```sql
-SELECT year, month, day
-FROM surveys;
-```
-
-```sql
-SELECT surveys.year, surveys.month, surveys.day
-FROM surveys;
-```
-
-
-
-## Syle | _Execute SQL_ (Cmd-Enter/Ctrl-Enter)
-
-Good
-
-```sql
-SELECT year
-FROM surveys;
-```
-
-Bad
-
-```sql
-select year from surveys;
-```
-
-
-
-## `LIMIT` and `DISTINCT`
-
-```sql
-SELECT *
-FROM surveys
-LIMIT 10;
-```
-
-```sql
-SELECT DISTINCT species_id
-FROM surveys;
-```
-
-
-
-## Calculated values | `+`, `-`, `*`, `/`, and `ROUND(<what?>, <digits>)`
-
-```sql
-SELECT year, month, day, weight / 1000
-FROM surveys;
-```
-
-```sql
-SELECT plot_id, species_id, sex, weight, ROUND(weight / 1000, 2)
-FROM surveys;
-```
-
-
-
-## `<INTEGER> / 1000`
-
-Change `weight` to integer:
-
-* _Database Structure > surveys > Modify Table_ to INTEGER
-
-```sql
-SELECT weight / 1000
-FROM surveys
-```
-
-```sql
-SELECT weight / 1000.00
-FROM surveys
-```
-
-Change back
-
-
-
-## Challenge
-
-<img src="sql2.png" align="right" width = 750 />
-
-## Solution
-
-```sql
-SELECT day, month, year, species_id, weight * 1000
-FROM surveys;
-```
-
-
-
-## Filtering with `WHERE`
-
-```sql
-SELECT *
-FROM surveys
-WHERE species_id = 'DM';
-```
-
-```sql
-SELECT * FROM surveys
-WHERE year >= 2000;
-```
-
-
-
-## Multiple conditions: `AND`, `OR`, and `IN`
-
-```sql
-SELECT *
-FROM surveys
-WHERE (year >= 2000) AND (species_id = 'DM');
-```
-
-```sql
-SELECT *
-FROM surveys
-WHERE (species_id = 'DM') OR (species_id = 'DO') OR (species_id = 'DS');
-
--- Same as above. BTW, I'm a comment :)
-SELECT *
-FROM surveys
-WHERE species_id IN ('DM', 'DO', 'DS');
-```
-
-
-
-## Challenge
-
-<img src="sql3.png" align="right" width = 750 />
-
-## Solution
-
-```sql
-SELECT day, month, year, species_id, weight / 1000
-FROM surveys
-WHERE (plot_id = 1) AND (weight > 75);
-```
-
-
-
-## Sorting: `ORDER BY <column> ASC/DESC`
-
-```sql
-SELECT *
-FROM species
-ORDER BY taxa ASC;
-```
-
-```sql
-SELECT *
-FROM species
-ORDER BY taxa DESC;
-```
-
-```sql
-SELECT *
-FROM species
--- ASC is implicit (default).
-ORDER BY genus, species;
-```
-
-
-
-## Challenge
-
-<img src="sql4.png" align="right" width = 750 />
-
-## Solution
-
-```sql
-SELECT year, species_id, weight / 1000
-FROM surveys
-ORDER BY weight DESC;
-```
-
-
-
-
-
-## Challenge
-
-<img src="sql5.png" align="right" width = 750 />
-
-## Solution
-
-```sql
-SELECT year, month, day, species_id, ROUND(weight / 1000, 2)
-FROM surveys
-WHERE year = 1999
-ORDER BY species_id;
-```
-
-
-
-## Key points
-
-* "Good" style and comments make your code easier to understand.
-
-* SQL helps you select columns, filter and order rows
-
-* Pick specific rows using conditions with `AND`, `OR` and `IN`.
-
-* Compute on column values with arithmetic operators.
-
-
-## Bonus: Basic query in R
-
-```{r, echo=TRUE}
-surveys %>%
-  mutate(weight_kg = round(weight / 1000, 2)) %>% 
-  select(year, month, day, species_id, weight_kg) %>% 
-  filter(year == 1999) %>%
-  arrange(species_id) %>% 
-  # Show interesting rows
-  filter(!is.na(weight_kg))
 ```
 
 
