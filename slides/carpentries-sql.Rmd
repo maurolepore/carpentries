@@ -372,7 +372,7 @@ ORDER BY species_id;
 
 ## Bonus: SQL from an R environment
 
-If you already have a database, you can also use it.
+Setup
 
 ```{r, echo=TRUE, message=FALSE}
 # Use packages
@@ -862,6 +862,5 @@ plots %>%
 ```
 
 
-## End
 
-# Super last slide
+## End
