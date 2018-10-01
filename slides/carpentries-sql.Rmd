@@ -102,13 +102,13 @@ Menu:
 
 
 
-## Bonus: A database in sheets
+## Bonus: Tables in a sheets database
 
 <img src="sql-6.png" align="right" width = 750 />
 
 
 
-## Bonus: A database in R
+## Bonus: Tables in a .csv database in R
 
 ```{r, echo = TRUE, message=FALSE}
 library(here)
@@ -123,13 +123,13 @@ species <- read_csv(here("species.csv"))
 surveys <- read_csv(here("surveys.csv"))
 ```
 
-## Bonus: A database in R
+## Bonus: Tables in a .csv database in R
 
 ```{r, echo=TRUE}
 surveys 
 ```
 
-## Bonus: Using an database connection from R | Connecting to the database
+## Bonus: Tables in a sqlite database
 
 If you already have a database, you can also use it.
 
@@ -138,35 +138,123 @@ path <- here("data-raw/portal/portal_mammals.sqlite")
 db <- DBI::dbConnect(RSQLite::SQLite(), path)
 ```
 
-## Bonus: Using an database connection from R | Queries with SQL from rmarkdown (R)
+Copy each table from the database.
 
-Using these chunk options:
+```{r, echo=TRUE, message=FALSE}
+plots_db   <- tbl(db, "plots")
+species_db <- tbl(db, "species")
+surveys_db <- tbl(db, "surveys")
+```
+
+## Bonus: Tables in a sqlite database
+
+```{r, echo=TRUE}
+surveys_db
+```
+
+
+
+
+
+
+# 2. Basic Queries (35') | How do I write a basic query in SQL?
+
+
+
+## `SELECT <columns> FROM <table>` | Different ways to select columns from a table:
+
+```sql
+SELECT *
+  FROM surveys;
+```
+
+```sql
+SELECT year, month, day
+FROM surveys;
+```
+
+```sql
+SELECT surveys.year, surveys.month, surveys.day
+FROM surveys;
+```
+
+
+
+## Syle | _Execute SQL_ (Cmd-Enter/Ctrl-Enter)
+
+Good
+
+```sql
+SELECT year
+FROM surveys;
+```
+
+Bad
+
+```sql
+select year from surveys;
+```
+
+
+
+
+## `LIMIT`, `DISTINCT`
+
+```sql
+SELECT DISTINCT species_id
+FROM surveys
+LIMIT 5;
+```
+
+## Calculated values | E.g. `ROUND(<column>, <digits>)`
+
+```sql
+SELECT species_id, ROUND(weight / 1000, 3)
+FROM surveys;
+```
+
+
+
+## Bonus: SQL from an R environment
+
+If you already have a database, you can also use it.
+
+```{r, echo=TRUE, message=FALSE}
+# Use packages
+library(here)
+library(tidyverse)
+
+# Connect to the database
+path <- here("data-raw/portal/portal_mammals.sqlite")
+db <- DBI::dbConnect(RSQLite::SQLite(), path)
+
+# Use a specific table from the database
+surveys_db <- tbl(db, "surveys")
+class(surveys_db)
+```
+
+## Bonus: SQL from an R environment
+
+```{r, echo=TRUE}
+surveys_db
+```
+
+## Bonus: Let R write SQL for you
+
+```{r, echo=TRUE}
+show_query(surveys_db)
+```
+
+
+
+## Bonus: Use SQL engine (Rmarkdown)
+
 
 `{sql, engine = "sql", connection = "db"}`
 
 ```{sql, echo = TRUE, engine = "sql", connection = "db"}
 SELECT record_id, plot_id, species_id, sex
 FROM surveys
-```
-
-
-
-## Bonus: Using an database connection from R | Queries with R via R-SQL objects
-
-Creating special tables to query the database.
-
-```{r, echo=TRUE, message=FALSE}
-plots_db   <- tbl(db, "plots")
-species_db <- tbl(db, "species")
-surveys_db <- tbl(db, "surveys")
-
-class(surveys_db)
-```
-
-## Bonus: Using an database connection from R | Queries with R via R-SQL objects
-
-```{r, echo=TRUE}
-surveys_db
 ```
 
 
