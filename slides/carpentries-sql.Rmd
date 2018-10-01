@@ -154,9 +154,6 @@ surveys_db
 
 
 
-
-
-
 # 2. Basic Queries (35') | How do I write a basic query in SQL?
 
 
